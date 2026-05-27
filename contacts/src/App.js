@@ -1,9 +1,7 @@
 import {BrowserRouter,Routes,Route, Outlet, Navigate} from 'react-router-dom'
 import MainPage from './page/MainPage'
-import LoginPage from './page/LoginPage';
 import Header from './page/component/Header';
 import BlackJack from './page/Blackjack';
-import { createContext } from 'react';
 import {create} from 'zustand'
 
 export const UserProperty = create((set)=>({
@@ -13,6 +11,11 @@ export const UserProperty = create((set)=>({
   setBetting: (newbetting) =>set({betting:newbetting})
 }))
 
+export const Login = create((set)=>({
+  user:false,
+  login: () =>set({user:true}),
+  logout: ()=>set({user:false})
+}))
 
 
 
@@ -23,7 +26,6 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Navigate to={"/index"} replace />} />
-            <Route path='/login' element={<LoginPage />} />
             <Route path='/index' element={<MainPage />} />
             <Route path='/Blackjack' element={<BlackJack />} />
           </Routes>
