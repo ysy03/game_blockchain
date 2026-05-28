@@ -14,6 +14,21 @@ const BlackJack = () =>{
     const randomNumber = () =>{
         return Math.ceil(Math.random()*13)
     }
+
+    function getCard(number){
+        switch (number){
+            case 13:
+                return 'K'
+            case 12:
+                return 'Q'
+            case 11:
+                return 'J'
+            case 1:
+                return 'A'
+            default:
+                return String(number)
+        }
+    }
     
     const getNumber = (getnumber) =>{
         if(getnumber >= 10){
@@ -30,8 +45,8 @@ const BlackJack = () =>{
     useEffect(()=>{
         const dealerNumber = randomNumber()
         const gamePlayerNumber = randomNumber()
-        setDealer([...dealer,dealerNumber])
-        setGamePlayer([...gamePlayer,gamePlayerNumber]);
+        setDealer([...dealer,getCard(dealerNumber)])
+        setGamePlayer([...gamePlayer,getCard(gamePlayerNumber)]);
         setDealerScore(getNumber(dealerNumber))
         setGamescore(getNumber(gamePlayerNumber))
     },[])
@@ -39,7 +54,9 @@ const BlackJack = () =>{
     function AddButton(){
         const gamePlayerNumber = randomNumber()
         let newScore = gamescore
-        setGamePlayer([...gamePlayer,gamePlayerNumber]);
+        let DrowCard = gamePlayer
+        DrowCard.push(getCard(gamePlayerNumber))
+        setGamePlayer(DrowCard);
         setGamescore(gamescore + getNumber(gamePlayerNumber))
         newScore += getNumber(gamePlayerNumber)
         if(newScore > 21){
@@ -55,8 +72,8 @@ const BlackJack = () =>{
         let random = 0
         while(Card < gamescore){
             random = randomNumber();
-            newdealer.push(random);
-            Card += random
+            newdealer.push(getCard(random));
+            Card += getNumber(random)
         }
 
         setDealer(newdealer)

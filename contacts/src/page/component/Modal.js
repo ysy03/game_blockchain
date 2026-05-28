@@ -27,7 +27,7 @@ const Modal = ({game}) =>{
             <div style={{width:'30%',height:'30%',backgroundColor:'white'}}>
                 <h1>{game}</h1>
                 <label for='betting'>베팅 금액</label>
-                <input type="number" id="betting" value={betting} onChange={(e)=>{Betting(e.target.value)}}/>
+                <input type="number" id="betting" value={betting} onChange={(e)=>{Betting(Number(e.target.value))}}/>
                 <button onClick={()=>{goGame(game)}}>게임 시작</button>
             </div>
         </div>
